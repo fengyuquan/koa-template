@@ -21,6 +21,10 @@ const ParameterException = require('../exception/http/ParameterException')
  * @paramsChecked，保存已经校验通过的参数，并合并了可选参数的默认值（当前端没传时）
  */
 class BaseValidator {
+    params
+    paramsChecked
+    memberKeys
+
     constructor(ctx) {
         this._initParams(ctx)
     }

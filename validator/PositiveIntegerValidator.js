@@ -1,6 +1,9 @@
 const {BaseValidator, Rule} = require('../util/BaseValidator')
 
 class PositiveIntegerValidator extends BaseValidator {
+
+    id
+
     constructor(ctx) {
         super(ctx)
         this.id = [

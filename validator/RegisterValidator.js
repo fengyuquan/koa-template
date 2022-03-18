@@ -1,6 +1,13 @@
 const {BaseValidator, Rule} = require('../util/BaseValidator')
 
 class RegisterValidator extends BaseValidator {
+
+    email
+    password1
+    password2
+    nickname
+    like
+
     constructor(ctx) {
         super(ctx)
         this.email = [
