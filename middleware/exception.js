@@ -1,5 +1,6 @@
 const codes = require('../config/exception-code')
 const HttpException = require('../exception/http/HttpException')
+const ParameterException = require('../exception/http/ParameterException')
 
 const catchError = async (ctx, next) => {
     try {
@@ -11,7 +12,12 @@ const catchError = async (ctx, next) => {
     } catch (error) {
         if (error instanceof HttpException) {
             // 已知错误，是主动抛出的
-            _unifyResponse(ctx, error.code, codes[error.code], error.httpStatusCode)
+            // 针对参数校验错误，它的message应该是由校验类传递过来的，不再通过查询codes配置文件获得
+            let message = codes[error.code]
+            if (error instanceof ParameterException && error.message) {
+                message = error.message
+            }
+            _unifyResponse(ctx, error.code, message, error.httpStatusCode)
         } else {
             // 未知错误，非主动抛出，一般是服务器错误
             ctx.error = error
