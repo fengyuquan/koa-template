@@ -22,12 +22,12 @@ class Init {
     }
 
     static initLoadHttpException() {
-        const exceptionDirectory = path.normalize(`${process.cwd()}/exception`)
+        const exceptionDirectory = path.normalize(`${process.cwd()}/app/exception`)
         global.errs = requireDirectory(module, exceptionDirectory)
     }
 
     static initLoadConfig () {
-        const configPath = path.normalize(`${process.cwd()}/config/config.js`)
+        const configPath = path.normalize(`${process.cwd()}/app/config/config.js`)
         global.config = require(configPath)
     }
 }
