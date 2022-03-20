@@ -18,21 +18,14 @@ class RegisterValidator extends BaseValidator {
                 min: 6,
                 max: 32,
             }),
-            new Rule('matches', '密码不符合规范', '^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?![,\.#%\'\+\*\-:;^_`]+$)[,\.#%\'\+\*\-:;^_`0-9A-Za-z]{6,20}$'),
+            new Rule('matches', '密码应包含数字和字母', '^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?![,\.#%\'\+\*\-:;^_`]+$)[,\.#%\'\+\*\-:;^_`0-9A-Za-z]{6,20}$'),
         ]
         this.password2 = this.password1
         this.nickname = [
-            new Rule('isLength', '昵称不符合长度规范', {
+            new Rule('isLength', '昵称不符合长度规范，至少4个字符，最多32个字符', {
                 min: 4,
                 max: 32,
             }),
-        ]
-        this.like = [
-            new Rule('isLength', '爱好不符合长度规范', {
-                min: 2,
-                max: 32,
-            }),
-            new Rule('isOptional', '', '无'),
         ]
     }
 
@@ -45,4 +38,6 @@ class RegisterValidator extends BaseValidator {
     }
 }
 
-module.exports = RegisterValidator
+module.exports = {
+    RegisterValidator
+}

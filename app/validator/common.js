@@ -12,4 +12,6 @@ class PositiveIntegerValidator extends BaseValidator {
     }
 }
 
-module.exports = PositiveIntegerValidator
+module.exports = {
+    PositiveIntegerValidator,
+}

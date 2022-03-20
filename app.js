@@ -4,9 +4,9 @@ const koaStatic = require('koa-static')
 const helmet = require('koa-helmet')
 const path = require('path')
 
-const Init = require('./core/init.js')
-const catchError = require('./middleware/exception')
-const {loggerMiddleware} = require('./middleware/logger')
+const Init = require('./app/core/init.js')
+const catchError = require('./app/middleware/exception')
+const {loggerMiddleware} = require('./app/middleware/logger')
 
 const app = new koa()
 
