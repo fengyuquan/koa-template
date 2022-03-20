@@ -2,10 +2,10 @@ const bcrypt = require('bcryptjs')
 const {DataTypes, Model} = require('sequelize')
 const sequelize = require('../core/db')
 
-class User extends Model {
+class UserModel extends Model {
 }
 
-User.init({
+UserModel.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true, // 主键
@@ -13,6 +13,8 @@ User.init({
     },
     nickname: {
         type: DataTypes.STRING,
+        unique: true, // 唯一性
+        allowNull: false,
     },
     email: {
         type: DataTypes.STRING(128),
@@ -33,4 +35,4 @@ User.init({
     tableName: 'user', // 需要选择模型名称
 })
 
-module.exports = User
+module.exports = UserModel

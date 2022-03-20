@@ -26,7 +26,7 @@ const sequelize = new Sequelize(dbName, username, password, {
 
 // 模型同步，开发时调试用
 sequelize.sync({
-    force: true, // 自动删除原来表，重新创建新的表
+    // force: true, // 自动删除原来表，重新创建新的表
 })
 
 Model.prototype.toJSON = function () {
