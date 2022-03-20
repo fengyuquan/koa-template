@@ -6,7 +6,6 @@ class RegisterValidator extends BaseValidator {
     password1
     password2
     nickname
-    like
 
     constructor(ctx) {
         super(ctx)

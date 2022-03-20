@@ -1,7 +1,10 @@
+const {Op} = require('sequelize')
+const bcrypt = require('bcryptjs')
 const UserModel = require('../model/user')
 const RepeatException = require('../exception/http/RepeatException')
 const sequelize = require('../core/db')
-const {Op} = require('sequelize')
+const UnAuthenticatedException = require('../exception/http/UnAuthenticatedException')
+const {generateToken} = require('../util/token')
 
 class UserDao {
     static async createUser(v) {
@@ -41,6 +44,28 @@ class UserDao {
 
         return user
     }
+
+    static async emailLogin(v) {
+        const user = await UserDao._verifyEmailPassword(v)
+        return generateToken(user.id)
+    }
+
+    static async _verifyEmailPassword(v) {
+        const user = await UserModel.findOne({
+            where: {
+                email: v.get('body.email')
+            }
+        })
+        if (!user) {
+            throw new UnAuthenticatedException(20002)
+        }
+        const correct = bcrypt.compareSync(v.get('body.password'), user.password)
+        if (!correct) {
+            throw new UnAuthenticatedException(20003)
+        }
+        return user
+    }
+
 }
 
 module.exports = UserDao

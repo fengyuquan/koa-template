@@ -5,15 +5,18 @@ const path = require('path')
 class Init {
     static initCore(app) {
         Init.app = app
+        Init.initLoadConfig()
         Init.initLoadRouters()
         Init.initLoadHttpException()
-        Init.initLoadConfig()
     }
 
     static initLoadRouters() {
         const apiDirectory = path.normalize(`${process.cwd()}/app/api`)
         requireDirectory(module, apiDirectory, {
             visit: obj => {
+                if (global.config.env==='dev') {
+                    console.log(`注册了路由 ${obj.opts.prefix}`)
+                }
                 if (obj instanceof Router) {
                     Init.app.use(obj.routes(), obj.allowedMethods())
                 }
