@@ -1,14 +1,17 @@
 {
-  "name": "island",
+  "name": "Koa Template",
   "version": "1.0.0",
-  "description": "",
+  "description": "封装一个开箱可用的Koa模板代码",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "cross-env NODE_ENV=development nodemon app.js",
+    "start:prod": "cross-env NODE_ENV=production node app.js",
+    "prepare": "husky install"
   },
   "author": "fengyuquan",
   "license": "MIT",
   "dependencies": {
+    "@koa/cors": "^3.3.0",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
@@ -22,5 +25,27 @@
     "require-directory": "^2.1.1",
     "sequelize": "^6.17.0",
     "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "cross-env": "^7.0.3",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "nodemon": "^2.0.15",
+    "prettier": "2.6.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": "prettier --write --ignore-unknown"
   }
 }
