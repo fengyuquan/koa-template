@@ -1,16 +1,19 @@
 const jwt = require('jsonwebtoken')
-const {secretKey, expiresIn} = require('../config/config').security
+const { secretKey, expiresIn } = require('../config/config').security
 
-function generateToken(uid) {
-    return jwt.sign({
-            uid,
-        },
-        secretKey,
-        {
-            expiresIn,
-        })
+function generateToken(uid, scope) {
+  return jwt.sign(
+    {
+      uid,
+      scope
+    },
+    secretKey,
+    {
+      expiresIn
+    }
+  )
 }
 
 module.exports = {
-    generateToken,
+  generateToken
 }
